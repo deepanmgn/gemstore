@@ -1,0 +1,55 @@
+<html ng-app="student">
+	<head>
+		<link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
+		<script type="text/javascript" src="angular.min.js"></script>
+		<script type="text/javascript" src="app.js"></script>
+	</head>
+
+	<body ng-controller="StudentController as student">
+
+		<ul class="list-group">
+			<li class="list-group-item" ng-repeat="kid in student.kids">
+				<h1> {{kid.name}}</h1>
+				<p>{{kid.section}}</p>
+				<p> {{kid.roll_no}}</p>
+				<img ng-src="{{kid.image}}" />
+				<button ng-show="kid.edit"> Edit</button>
+
+				<section ng-controller="PanelController as panel">
+					<ul class="nav nav-pills">
+						<li ng-class="{ active: panel.isSelected(1)}"> <a href ng-click="panel.selectTab(1)">Description</a> </li>
+						<li ng-class="{ active: panel.isSelected(2)}"> <a href ng-click="panel.selectTab(2)">Homework</a> </li>
+						<li ng-class="{ active: panel.isSelected(3)}"> <a href ng-click="panel.selectTab(3)">Report</a></li>
+					</ul>
+
+					<div class="panel" ng-show="panel.isSelected(1)">
+						<h4>Description</h4>
+						<p>{{kid.description}}</p>
+						</div>
+						<div class="panel" ng-show="panel.isSelected(2)">
+							<h4>Homework</h4>
+							<blockquote>None yet!</blockquote>
+							</div>
+							<div class="panel" ng-show="panel.isSelected(3)">
+							<h4>Progress Report</h4>
+							<blockquote ng-repeat="report in kids.reports"> </blockquote>
+							<form name="reportForm">
+								<select>
+									<option value="1">1 star</option>
+									<option value="2">2 stars</option>
+									<option value="3">3 stars</option>
+									<option value="4">4 stars</option>
+									<option value="5">5 stars</option>
+									</select>
+									<textarea></textarea>
+									<input type="submit" value="submit" />
+							</form>
+							</div>
+				</section>
+
+			</li>
+		</ul>
+
+	</body>
+
+</html>
